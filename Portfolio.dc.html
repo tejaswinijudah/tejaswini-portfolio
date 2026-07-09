@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); }
+    :root {
+      --bg: #0A0D14; --surface: #10151F; --card: #131A28; --line: rgba(148,163,184,0.16);
+      --ink: #EDF1F8; --muted: #94A1B5; --accent: #FF5A3C; --gold: #FFC24B; --mint: #43D9A3;
+      --chipbg: rgba(148,163,184,0.07); --navbg: rgba(10,13,20,0.82); --heroglow: radial-gradient(ellipse 60% 45% at 30% 0%, rgba(255,90,60,0.13), transparent 70%);
+    }
+    html[data-theme="light"] {
+      --bg: #F7F5F0; --surface: #FFFFFF; --card: #FFFFFF; --line: rgba(15,23,42,0.13);
+      --ink: #131722; --muted: #5A6474; --accent: #E8431F; --gold: #B97F0A; --mint: #0E9268;
+      --chipbg: rgba(15,23,42,0.045); --navbg: rgba(247,245,240,0.85); --heroglow: radial-gradient(ellipse 60% 45% at 30% 0%, rgba(232,67,31,0.08), transparent 70%);
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  </style>
+</helmet>
+
+<div style="font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; transition: background 0.35s ease, color 0.35s ease;">
+
+  <!-- ============ NAV ============ -->
+  <nav data-screen-label="Nav" style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px clamp(20px, 5vw, 48px); background: var(--navbg); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);">
+    <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink);">
+      <span style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: #FFFFFF; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">TV</span>
+      <span style="font-weight: 600; font-size: 15px; letter-spacing: 0.3px;">Tejaswini V</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: clamp(10px, 2.5vw, 26px); font-size: 14px;">
+      <a href="#experience" style="color: var(--muted); text-decoration: none;" style-hover="color: var(--accent);">Experience</a>
+      <a href="#projects" style="color: var(--muted); text-decoration: none;" style-hover="color: var(--accent);">Projects</a>
+      <a href="#skills" style="color: var(--muted); text-decoration: none;" style-hover="color: var(--accent);">Skills</a>
+      <a href="#ask" style="color: var(--muted); text-decoration: none;" style-hover="color: var(--accent);">Ask&nbsp;me</a>
+      <button onClick="{{ toggleTheme }}" style="cursor: pointer; border: 1px solid var(--line); background: var(--chipbg); color: var(--ink); border-radius: 999px; padding: 7px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: border-color 0.2s;" style-hover="border-color: var(--accent);">{{ themeLabel }}</button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header id="top" data-screen-label="Hero" style="position: relative; background: var(--heroglow); padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px) clamp(40px, 6vw, 72px);">
+    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+      <div style="animation: fadeUp 0.7s ease both;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 18px;">SOFTWARE DEVELOPER · AI/ML &nbsp;—&nbsp; CHENNAI, IN</div>
+        <h1 style="margin: 0 0 18px 0; font-size: clamp(42px, 7vw, 76px); line-height: 1.02; letter-spacing: -1.5px; font-weight: 700; text-wrap: balance;">I build AI that <span style="color: var(--accent);">sees</span>, <span style="color: var(--gold);">searches</span> &amp; <span style="color: var(--mint);">ships</span>.</h1>
+        <p style="margin: 0 0 28px 0; max-width: 54ch; font-size: clamp(15px, 1.6vw, 17.5px); line-height: 1.65; color: var(--muted); text-wrap: pretty;">Final-year ECE student at Anna University, CEG — I've shipped a production AI media-cataloging desktop app to a real client, and helped deploy a cricket ball–tracking system for one of India's biggest sports franchises.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="#projects" style="text-decoration: none; background: var(--accent); color: #FFFFFF; padding: 13px 24px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: transform 0.15s ease;" style-hover="transform: translateY(-2px);">See my work ↓</a>
+          <a href="https://github.com/tejaswinijudah" style="text-decoration: none; border: 1px solid var(--line); background: var(--chipbg); color: var(--ink); padding: 13px 24px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: var(--accent);">GitHub</a>
+          <a href="https://www.linkedin.com/in/tejaswini-v-5b59953a3" style="text-decoration: none; border: 1px solid var(--line); background: var(--chipbg); color: var(--ink); padding: 13px 24px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: var(--accent);">LinkedIn</a>
+        </div>
+      </div>
+      <div style="animation: fadeUp 0.7s ease 0.15s both;">
+        <div style="position: relative; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--surface); box-shadow: 0 24px 60px rgba(0,0,0,0.25);">
+          <canvas ref="{{ canvasRef }}" onClick="{{ bowlAgain }}" style="display: block; width: 100%; aspect-ratio: 16 / 10.5; cursor: crosshair;"></canvas>
+          <div style="position: absolute; top: 12px; left: 14px; display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; pointer-events: none;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 1.6s infinite;"></span>
+            <span>LIVE · YOLO + KALMAN TRACKER</span>
+          </div>
+          <div style="position: absolute; bottom: 10px; right: 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; pointer-events: none;">CLICK TO BOWL ◉</div>
+        </div>
+        <div style="margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--muted); text-align: center;">a tiny homage to my ball-tracking project — solid dots = detections, dashed = Kalman prediction</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" data-screen-label="Experience" style="padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 48px);">
+    <div style="max-width: 1120px; margin: 0 auto;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 10px;">01 — EXPERIENCE</div>
+      <h2 style="margin: 0 0 28px 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.8px;">Where I've worked</h2>
+      <div style="border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: clamp(22px, 3.5vw, 36px); transition: border-color 0.2s;" style-hover="border-color: var(--accent);">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px;">
+          <div style="font-size: clamp(19px, 2.2vw, 23px); font-weight: 700;">Software Developer Intern <span style="color: var(--accent);">(AI/ML)</span></div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted);">MAY – JUN 2026</div>
+        </div>
+        <div style="color: var(--muted); font-size: 15px; margin-bottom: 18px;">Prodian Infotech · Chennai, India</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px;">
+          <div style="border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--chipbg);">
+            <div style="font-weight: 600; margin-bottom: 6px; color: var(--gold);">Owned a product end to end</div>
+            <div style="font-size: 14px; line-height: 1.6; color: var(--muted); text-wrap: pretty;">Architecture → backend → frontend → ML pipeline → packaging → client delivery, for an offline-first AI media-cataloging desktop app.</div>
+          </div>
+          <div style="border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--chipbg);">
+            <div style="font-weight: 600; margin-bottom: 6px; color: var(--mint);">Shipped v1 to a real client</div>
+            <div style="font-size: 14px; line-height: 1.6; color: var(--muted); text-wrap: pretty;">First production version deployed, demo well received, and improving through iterative client feedback cycles.</div>
+          </div>
+          <div style="border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--chipbg);">
+            <div style="font-weight: 600; margin-bottom: 6px; color: var(--accent);">Tracked a cricket ball</div>
+            <div style="font-size: 14px; line-height: 1.6; color: var(--muted); text-wrap: pretty;">Contributed to development and deployment of a YOLO + Kalman-filter ball-tracking pipeline for a major Indian sports franchise.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" data-screen-label="Projects" style="padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 48px); background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div style="max-width: 1120px; margin: 0 auto;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 10px;">02 — PROJECTS</div>
+      <h2 style="margin: 0 0 28px 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.8px;">Things I've built</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 18px;">
+
+        <div style="border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: clamp(20px, 3vw, 30px); display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s, transform 0.2s;" style-hover="border-color: var(--accent); transform: translateY(-4px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);">01 · AI DESKTOP APP</div>
+            <a href="https://github.com/tejaswinijudah" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); text-decoration: none;">CASE STUDY ↗</a>
+          </div>
+          <div style="font-size: 21px; font-weight: 700;">Image Tagger</div>
+          <div style="font-size: 14.5px; line-height: 1.65; color: var(--muted); text-wrap: pretty;">A privacy-first desktop app that turns a messy folder of photos &amp; videos into a searchable, self-describing library. On-device face recognition (ArcFace + DBSCAN + SVM with a k-NN verification gate), vision-LLM tagging behind one JSON-schema contract across 3 providers, instant offline hybrid search, and an agentic studio that builds collages and slideshow videos — with everything written back into the files as XMP/EXIF.</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Python</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">FastAPI</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">React</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">SQLite FTS5</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">InsightFace</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Gemini · GPT-4o · Claude</span>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: clamp(20px, 3vw, 30px); display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s, transform 0.2s;" style-hover="border-color: var(--accent); transform: translateY(-4px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);">02 · COMPUTER VISION</div>
+            <a href="https://github.com/tejaswinijudah" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); text-decoration: none;">CASE STUDY ↗</a>
+          </div>
+          <div style="font-size: 21px; font-weight: 700;">Cricket Ball Trajectory Tracking</div>
+          <div style="font-size: 14.5px; line-height: 1.65; color: var(--muted); text-wrap: pretty;">Ball tracking over real match footage for a leading Indian cricket franchise: a fine-tuned YOLO detector localizes the ball frame by frame through fast motion and blur, while a Kalman filter smooths detections and predicts the trajectory through occlusions — rendered as OpenCV overlays for post-shot analysis. (That's what the animation up top is doing.)</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Python</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">YOLO</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">OpenCV</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Kalman Filter</span>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: clamp(20px, 3vw, 30px); display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s, transform 0.2s;" style-hover="border-color: var(--accent); transform: translateY(-4px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);">03 · CLOUD &amp; IDENTITY</div>
+            <a href="https://github.com/tejaswinijudah" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); text-decoration: none;">CASE STUDY ↗</a>
+          </div>
+          <div style="font-size: 21px; font-weight: 700;">Azure Infrastructure &amp; Enterprise IAM</div>
+          <div style="font-size: 14.5px; line-height: 1.65; color: var(--muted); text-wrap: pretty;">A load-balanced, high-availability web tier on Azure (VNet, NSGs, PowerShell-automated IIS), plus a Microsoft Entra ID tenant built end to end — B2B guest users, security-group RBAC, least-privilege role models piloted for Stripe and Snowflake, SSO for Figma, Claude, Twingate &amp; Chargehound, and SCIM provisioning for Twingate.</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Azure</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Entra ID</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">RBAC</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">SSO / SAML</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">SCIM</span>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: clamp(20px, 3vw, 30px); display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s, transform 0.2s;" style-hover="border-color: var(--accent); transform: translateY(-4px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);">04 · EMBEDDED SYSTEMS</div>
+            <a href="https://github.com/tejaswinijudah" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); text-decoration: none;">CASE STUDY ↗</a>
+          </div>
+          <div style="font-size: 21px; font-weight: 700;">Automatic Waste Segregation</div>
+          <div style="font-size: 14.5px; line-height: 1.65; color: var(--muted); text-wrap: pretty;">An Arduino Uno embedded system that classifies metallic, wet, and dry waste using metal-detection and moisture sensors, with servo-driven bin selection for fully automated sorting — the ECE core-branch roots behind the software.</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Arduino Uno</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Embedded C</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Sensors</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--chipbg); color: var(--muted);">Servo Control</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" data-screen-label="Skills" style="padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 48px);">
+    <div style="max-width: 1120px; margin: 0 auto;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 10px;">03 — SKILLS</div>
+      <h2 style="margin: 0 0 28px 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.8px;">My toolkit</h2>
+      <sc-for list="{{ skillGroups }}" as="group" hint-placeholder-count="6">
+        <div style="margin-bottom: 22px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 10px;">{{ group.label }}</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 9px;">
+            <sc-for list="{{ group.items }}" as="it" hint-placeholder-count="6">
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 14px; font-weight: 500; transition: border-color 0.2s, transform 0.15s;" style-hover="border-color: var(--accent); transform: translateY(-2px);">
+                <sc-if value="{{ it.path }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 24 24" style="width: 17px; height: 17px; flex-shrink: 0;"><path fill="{{ it.color }}" d="{{ it.path }}"></path></svg>
+                </sc-if>
+                <sc-if value="{{ it.badge }}" hint-placeholder-val="{{ false }}">
+                  <span style="display: grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; background: {{ it.badgeBg }}; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600;">{{ it.badge }}</span>
+                </sc-if>
+                <span>{{ it.name }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ ASK ME ============ -->
+  <section id="ask" data-screen-label="Ask Me Anything" style="padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 48px); background: var(--surface); border-top: 1px solid var(--line);">
+    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: clamp(24px, 4vw, 48px); align-items: start;">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 10px;">04 — ASK ME ANYTHING</div>
+        <h2 style="margin: 0 0 14px 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.8px;">Interview me, right here.</h2>
+        <p style="margin: 0 0 22px 0; color: var(--muted); font-size: 15.5px; line-height: 1.65; max-width: 46ch; text-wrap: pretty;">Recruiter in a hurry? Tap a question — my portfolio answers the way I would.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 9px;">
+          <sc-for list="{{ suggestions }}" as="q" hint-placeholder-count="5">
+            <button onClick="{{ q.ask }}" style="cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 10px 16px; font-family: 'Space Grotesk', sans-serif; font-size: 13.5px; transition: border-color 0.2s, transform 0.15s;" style-hover="border-color: var(--accent); transform: translateY(-2px);">{{ q.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="border: 1px solid var(--line); border-radius: 18px; background: var(--card); display: flex; flex-direction: column; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 1px;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--mint);"></span> TEJASWINI.EXE — ONLINE
+        </div>
+        <div ref="{{ chatBoxRef }}" style="display: flex; flex-direction: column; gap: 10px; padding: 18px; min-height: 280px; max-height: 380px; overflow-y: auto;">
+          <sc-for list="{{ messages }}" as="m" hint-placeholder-count="1">
+            <div style="align-self: {{ m.align }}; max-width: 88%; padding: 11px 15px; border-radius: {{ m.radius }}; background: {{ m.bg }}; color: {{ m.color }}; border: {{ m.border }}; font-size: 14px; line-height: 1.6; white-space: pre-line; text-wrap: pretty;">{{ m.text }}</div>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line);">
+          <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask about my projects, stack, or why you should hire me…" style="flex: 1; min-width: 0; background: var(--chipbg); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-size: 14px; outline: none;" style-focus="border-color: var(--accent);">
+          <button onClick="{{ sendChat }}" style="cursor: pointer; background: var(--accent); color: #FFFFFF; border: none; border-radius: 10px; padding: 11px 18px; font-weight: 600; font-size: 14px; font-family: 'Space Grotesk', sans-serif;">Send</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <footer id="contact" data-screen-label="Contact" style="padding: clamp(48px, 7vw, 90px) clamp(20px, 5vw, 48px) 32px; border-top: 1px solid var(--line);">
+    <div style="max-width: 1120px; margin: 0 auto; text-align: center;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 14px;">05 — CONTACT</div>
+      <h2 style="margin: 0 0 14px 0; font-size: clamp(32px, 5vw, 54px); letter-spacing: -1px; text-wrap: balance;">Let's build something that ships.</h2>
+      <p style="margin: 0 auto 30px; color: var(--muted); font-size: 16px; max-width: 52ch; line-height: 1.65; text-wrap: pretty;">Open to Software Developer and AI/ML roles. The fastest way to reach me:</p>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 40px;">
+        <a href="mailto:tejaswinivijiyashankar@gmail.com" style="text-decoration: none; background: var(--accent); color: #FFFFFF; padding: 14px 26px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: transform 0.15s;" style-hover="transform: translateY(-2px);">tejaswinivijiyashankar@gmail.com</a>
+        <a href="tel:+919884129322" style="text-decoration: none; border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 14px 26px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: var(--accent);">+91 98841 29322</a>
+        <a href="https://www.linkedin.com/in/tejaswini-v-5b59953a3" style="text-decoration: none; border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 14px 26px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: var(--accent);">LinkedIn</a>
+        <a href="https://github.com/tejaswinijudah" style="text-decoration: none; border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 14px 26px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: var(--accent);">GitHub</a>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--muted); letter-spacing: 1px;">TEJASWINI V · ANNA UNIVERSITY CEG '27 · CHENNAI, INDIA</div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;defaultTheme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;dark&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Appearance&quot; },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FF5A3C&quot;, &quot;options&quot;: [&quot;#FF5A3C&quot;, &quot;#3D7BFD&quot;, &quot;#43D9A3&quot;, &quot;#FFC24B&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Appearance&quot; }
+}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let theme = null;
+    try { theme = localStorage.getItem('tv-theme'); } catch (e) {}
+    this.state = {
+      theme: theme || (props.defaultTheme ?? 'dark'),
+      icons: {},
+      chatInput: '',
+      messages: [
+        { who: 'bot', text: "Hi! I'm the interactive version of Tejaswini's portfolio. Ask me anything — her projects, her stack, or why she's worth an interview. 🏏" },
+      ],
+    };
+    this.canvasRef = React.createRef();
+    this.chatBoxRef = React.createRef();
+    this._bowl = null;
+  }
+
+  componentDidMount() {
+    this.applyTheme(this.state.theme);
+    this.startAnim();
+    this.loadIcons();
+  }
+
+  async loadIcons() {
+    const slugs = ['python', 'c', 'cplusplus', 'javascript', 'pytorch', 'scikitlearn', 'opencv', 'googlegemini', 'openai', 'claude', 'fastapi', 'sqlite', 'postgresql', 'pydantic', 'react', 'html5', 'docker', 'git', 'github', 'linux', 'figma', 'stripe', 'snowflake'];
+    const entries = await Promise.all(slugs.map(async (s) => {
+      try {
+        const r = await fetch('https://cdn.jsdelivr.net/npm/simple-icons@14/icons/' + s + '.svg');
+        if (!r.ok) return [s, ''];
+        const t = await r.text();
+        const m = t.match(/ d="([^"]+)"/);
+        return [s, m ? m[1] : ''];
+      } catch (e) { return [s, '']; }
+    }));
+    this.setState({ icons: Object.fromEntries(entries) });
+  }
+
+  componentDidUpdate() {
+    this.applyTheme(this.state.theme);
+    const box = this.chatBoxRef.current;
+    if (box) box.scrollTop = box.scrollHeight;
+  }
+
+  componentWillUnmount() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._ro) this._ro.disconnect();
+  }
+
+  applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    if (this.props.accent) document.documentElement.style.setProperty('--accent', this.props.accent);
+    try { localStorage.setItem('tv-theme', t); } catch (e) {}
+  }
+
+  cssVar(name, fallback) {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
+  }
+
+  startAnim() {
+    const cv = this.canvasRef.current;
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    let W = 0, H = 0;
+    const fit = () => {
+      const dpr = window.devicePixelRatio || 1;
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    fit();
+    this._ro = new ResizeObserver(fit);
+    this._ro.observe(cv);
+
+    const G = 0.16, REST = 0.72, GROUND = () => H - 26;
+    let ball = null, trail = [];
+    const bowl = () => {
+      ball = { x: -12, y: H * (0.18 + Math.random() * 0.22), vx: 2.4 + Math.random() * 1.7, vy: 0.5 + Math.random() * 1.0, conf: 0.9 + Math.random() * 0.09 };
+      trail = [];
+    };
+    this._bowl = bowl;
+    bowl();
+
+    const step = () => {
+      if (!ball || W === 0) { this._raf = requestAnimationFrame(step); return; }
+      // physics
+      ball.vy += G;
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+      if (ball.y > GROUND()) { ball.y = GROUND(); ball.vy *= -REST; }
+      trail.push({ x: ball.x, y: ball.y });
+      if (trail.length > 70) trail.shift();
+      if (ball.x > W + 24) bowl();
+
+      const accent = this.cssVar('--accent', '#FF5A3C');
+      const muted = this.cssVar('--muted', '#94A1B5');
+      const mint = this.cssVar('--mint', '#43D9A3');
+      const line = this.cssVar('--line', 'rgba(148,163,184,0.16)');
+
+      ctx.clearRect(0, 0, W, H);
+
+      // camera grid
+      ctx.strokeStyle = line; ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let gx = 0; gx <= W; gx += 44) { ctx.moveTo(gx, 0); ctx.lineTo(gx, H); }
+      for (let gy = 0; gy <= H; gy += 44) { ctx.moveTo(0, gy); ctx.lineTo(W, gy); }
+      ctx.stroke();
+
+      // pitch line
+      ctx.strokeStyle = muted; ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 5]);
+      ctx.beginPath(); ctx.moveTo(0, GROUND() + 9); ctx.lineTo(W, GROUND() + 9); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // detection trail
+      trail.forEach((p, i) => {
+        const a = (i / trail.length) * 0.85;
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = a;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 2.1, 0, Math.PI * 2); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      // Kalman prediction (integrate forward)
+      let px = ball.x, py = ball.y, pvx = ball.vx, pvy = ball.vy;
+      ctx.strokeStyle = mint; ctx.lineWidth = 1.6; ctx.setLineDash([5, 6]);
+      ctx.beginPath(); ctx.moveTo(px, py);
+      for (let i = 0; i < 110; i++) {
+        pvy += G; px += pvx; py += pvy;
+        if (py > GROUND()) { py = GROUND(); pvy *= -REST; }
+        ctx.lineTo(px, py);
+        if (px > W + 20) break;
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+
+      // ball (with seam)
+      ctx.fillStyle = accent;
+      ctx.beginPath(); ctx.arc(ball.x, ball.y, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(ball.x, ball.y, 4.2, 0.4, Math.PI - 0.4); ctx.stroke();
+
+      // YOLO-style bounding box
+      const bs = 15;
+      ctx.strokeStyle = mint; ctx.lineWidth = 1.4;
+      const corners = [[-1, -1], [1, -1], [-1, 1], [1, 1]];
+      corners.forEach(([sx, sy]) => {
+        ctx.beginPath();
+        ctx.moveTo(ball.x + sx * bs, ball.y + sy * bs - sy * 7);
+        ctx.lineTo(ball.x + sx * bs, ball.y + sy * bs);
+        ctx.lineTo(ball.x + sx * bs - sx * 7, ball.y + sy * bs);
+        ctx.stroke();
+      });
+      ctx.fillStyle = mint;
+      ctx.font = "10.5px 'JetBrains Mono', monospace";
+      ctx.fillText('ball ' + ball.conf.toFixed(2), ball.x + bs + 5, ball.y - bs + 4);
+
+      this._raf = requestAnimationFrame(step);
+    };
+    step();
+  }
+
+  answer(raw) {
+    const q = raw.toLowerCase();
+    const has = (...words) => words.some((w) => q.includes(w));
+    if (has('hire', 'why you', 'why her', 'why should')) return "Because I don't just study AI — I've shipped it. At Prodian Infotech I owned a full product lifecycle (architecture → ML pipeline → client delivery) and the v1 is deployed with a real client today. I learn fast, I finish what I start, and I'm equally comfortable in Python backends, React frontends, and CV pipelines.";
+    if (has('image tagger', 'best project', 'coolest', 'proud')) return "Image Tagger — a privacy-first desktop app that turns a folder of photos into a searchable library. My favorite part: the face-recognition verification gate. An SVM always picks *someone*, so I added cosine thresholds + k-NN consensus to catch confident-but-wrong matches and route them to human review. That decision is what made it client-ready.";
+    if (has('ball', 'cricket', 'track')) return "We tracked a cricket ball through real match footage for a major Indian franchise: a fine-tuned YOLO detector finds the ball each frame, and a Kalman filter smooths the noisy detections and predicts the trajectory through occlusions. The hero animation on this page is a tiny live homage to it — click it to bowl. 🏏";
+    if (has('stack', 'skill', 'tech', 'tool', 'language')) return "Core: Python, C/C++, SQL, JavaScript. AI/ML: PyTorch, scikit-learn, OpenCV, YOLO, InsightFace, Kalman filtering, multi-provider LLM APIs (Gemini, GPT-4o, Claude). Backend: FastAPI, SQLite FTS5, PostgreSQL. Frontend: React. Cloud: Azure, Entra ID, RBAC, SSO/SCIM, Docker, Git.";
+    if (has('ai', 'ml', 'llm', 'model')) return "I've done applied AI end to end: on-device face recognition (ArcFace embeddings + DBSCAN + SVM), vision-LLM tagging behind one JSON-schema contract across three providers with retry/backoff and key rotation, hybrid semantic search with sentence-transformers, and agentic pipelines that plan → retrieve → curate → render.";
+    if (has('education', 'college', 'cgpa', 'university', 'study')) return "Final-year B.E. in Electronics & Communication Engineering at Anna University, College of Engineering Guindy (CEG), Chennai — CGPA 8.0, zero arrears. Also the Placement Representative for my department.";
+    if (has('cloud', 'azure', 'identity', 'sso', 'rbac', 'entra')) return "I built an Entra ID tenant end to end: internal users, B2B guest invitations, and security-group RBAC. I piloted least-privilege role models for Stripe and Snowflake, configured SSO for Figma, Claude, Twingate and Chargehound, and set up SCIM provisioning for Twingate. Plus a load-balanced Azure web tier with automated IIS provisioning.";
+    if (has('fun', 'hobby', 'person', 'like', 'team')) return "I'm the person who volunteers to demo. I coordinate placements for my whole department (herding recruiters AND students), I've done Youth Red Cross, and I genuinely enjoy explaining how things work — which is probably why this portfolio talks back.";
+    if (has('contact', 'email', 'reach', 'phone', 'call')) return "Easiest: tejaswinivijiyashankar@gmail.com — or +91 98841 29322. LinkedIn and GitHub links are in the footer right below. I reply fast. ⚡";
+    if (has('experience', 'intern', 'prodian', 'work')) return "Software Developer Intern (AI/ML) at Prodian Infotech, May–June 2026. I owned one product end to end — an offline-first AI media-cataloging desktop app that shipped its v1 to a client — and contributed to deploying a cricket ball-tracking system for a major sports franchise.";
+    return "Good question — that one deserves a real conversation. Email me at tejaswinivijiyashankar@gmail.com and ask me in an interview. Meanwhile, try: \u201cWhy should we hire you?\u201d or \u201cHow do you track a cricket ball?\u201d";
+  }
+
+  ask(text) {
+    if (!text.trim()) return;
+    this.setState((s) => ({ messages: [...s.messages, { who: 'user', text }], chatInput: '' }));
+    setTimeout(() => {
+      this.setState((s) => ({ messages: [...s.messages, { who: 'bot', text: this.answer(text) }] }));
+    }, 550);
+  }
+
+  renderVals() {
+    const icons = this.state.icons || {};
+    const chip = (name, slug, hex) => {
+      const path = icons[slug] || '';
+      if (path) return { name, path, color: '#' + hex, badge: '', badgeBg: '' };
+      return { name, path: '', color: '', badge: name.replace(/[^A-Za-z0-9+]/g, '').slice(0, 2), badgeBg: '#' + hex };
+    };
+    const badge = (name, letters, bg) => ({ name, path: '', color: '', badge: letters, badgeBg: bg });
+
+    const skillGroups = [
+      { label: 'LANGUAGES', items: [chip('Python', 'python', '3776AB'), chip('C', 'c', 'A8B9CC'), chip('C++', 'cplusplus', '00599C'), chip('JavaScript', 'javascript', 'F7DF1E'), badge('SQL', 'SQ', '#4479A1'), badge('MATLAB', 'M', '#E16737')] },
+      { label: 'AI / ML', items: [chip('PyTorch', 'pytorch', 'EE4C2C'), chip('scikit-learn', 'scikitlearn', 'F7931E'), chip('OpenCV', 'opencv', '5C3EE8'), badge('YOLO', 'YO', '#00B0FF'), badge('Kalman Filtering', 'KF', '#43D9A3'), badge('InsightFace · ArcFace', 'IF', '#8E75B2'), chip('Google Gemini', 'googlegemini', '8E75B2'), chip('OpenAI GPT-4o', 'openai', '10A37F'), chip('Anthropic Claude', 'claude', 'D97757'), badge('Agentic Pipelines', 'AG', '#FF5A3C')] },
+      { label: 'BACKEND & DATA', items: [chip('FastAPI', 'fastapi', '009688'), chip('SQLite (FTS5)', 'sqlite', '58A6D6'), chip('PostgreSQL', 'postgresql', '4169E1'), chip('Pydantic', 'pydantic', 'E92063'), badge('REST APIs', 'API', '#5A6474')] },
+      { label: 'FRONTEND', items: [chip('React', 'react', '61DAFB'), chip('HTML5', 'html5', 'E34F26'), badge('CSS', 'CSS', '#663399')] },
+      { label: 'CLOUD & IDENTITY', items: [badge('Microsoft Azure', 'Az', '#0078D4'), badge('Entra ID', 'En', '#0078D4'), badge('RBAC · IAM', 'RB', '#5A6474'), badge('SSO (SAML/OIDC)', 'SSO', '#B97F0A'), badge('SCIM', 'SC', '#0E9268'), chip('Docker', 'docker', '2496ED'), chip('Git', 'git', 'F05032'), chip('GitHub', 'github', '8B949E'), chip('Linux', 'linux', 'FCC624')] },
+      { label: 'INTEGRATED FOR SSO / RBAC', items: [chip('Figma', 'figma', 'F24E1E'), chip('Stripe', 'stripe', '635BFF'), chip('Snowflake', 'snowflake', '29B5E8'), badge('Twingate', 'TG', '#171717'), badge('Chargehound', 'CH', '#5A6474')] },
+    ];
+
+    const isDark = this.state.theme === 'dark';
+    const messages = this.state.messages.map((m) => m.who === 'user'
+      ? { text: m.text, align: 'flex-end', bg: 'var(--accent)', color: '#FFFFFF', border: 'none', radius: '14px 14px 4px 14px' }
+      : { text: m.text, align: 'flex-start', bg: 'var(--chipbg)', color: 'var(--ink)', border: '1px solid var(--line)', radius: '14px 14px 14px 4px' });
+
+    const mkAsk = (label, text) => ({ label, ask: () => this.ask(text || label) });
+
+    return {
+      themeLabel: isDark ? '☀ LIGHT' : '● DARK',
+      toggleTheme: () => this.setState({ theme: isDark ? 'light' : 'dark' }),
+      canvasRef: this.canvasRef,
+      chatBoxRef: this.chatBoxRef,
+      bowlAgain: () => { if (this._bowl) this._bowl(); },
+      skillGroups,
+      messages,
+      suggestions: [
+        mkAsk('Why should we hire you?'),
+        mkAsk('How do you track a cricket ball?', 'How do you track a cricket ball?'),
+        mkAsk("What's your coolest project?", "What's your coolest project?"),
+        mkAsk("What's your stack?", "What's your stack?"),
+        mkAsk('Are you fun to work with?', 'Are you fun to work with?'),
+      ],
+      chatInput: this.state.chatInput,
+      onChatInput: (e) => this.setState({ chatInput: e.target.value }),
+      onChatKey: (e) => { if (e.key === 'Enter') this.ask(this.state.chatInput); },
+      sendChat: () => this.ask(this.state.chatInput),
+    };
+  }
+}
+</script>
+</body>
+</html>
